@@ -1,0 +1,37 @@
+name	description
+mp1v	MPEG-1 Video - recommended for portability
+mp2v	MPEG-2 Video - used in DVDs
+mp4v	MPEG-4 Video
+SVQ1	Sorenson Video v1
+SVQ3	Sorenson Video v3
+DVDv	VOB Video - used in DVDs
+WMV1	Windows Media Video v1
+WMV2	Windows Media Video v2
+WMV3	Windows Media Video v3, also called Windows Media 9 (unsupported)
+DVSD	Digital Video
+MJPG	MJPEG
+H263	H263
+h264	H264
+theo	Theora
+IV20	Indeo Video
+IV40	Indeo Video version 4 or later
+RV10	Real Media Video
+cvid	Cinepak
+VP31	On2 VP3
+FLV1	Flash Video
+CYUV	Creative YUV
+HFYU	Huffman YUV
+MSVC	Microsoft Video v1
+MRLE	Microsoft RLE Video
+AASC	Autodesk Animator Studio Codec RLE Video
+FLIC	FLIC video
+QPEG	QPEG Video
+VP8	VP8 Video
+mpga	MPEG audio (recommended for portability)
+mp3	MPEG Layer 3 audio
+mp4a	MP4 audio
+a52	Dolby Digital (A52 or AC3)
+vorb	Vorbis
+opus	Opus
+spx	Speex
+flac	FLAC

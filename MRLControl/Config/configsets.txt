@@ -1,0 +1,34 @@
+FFShowVideoFile	Play	FFPlay	ffplay -i "$FILE\VIDEOEXT$"	488,6,200,400	RecordWMike		Displays file at location	
+FFShowVideoFileFilters	Play	FFPlay	ffplay -i "$FILE\VIDEOEXT$" $FFMPEGFilters$  	408,131,784,615				
+RecordInputMike	Output	FFMPeg	ffmpeg -f dshow -i video="$LOCALVIDEODEVICE$":audio="$LOCALAUDIODEVICE$" "$MEDIAOUTDIRECTORY$$NEWFILERecord$.avi"	300,300,400,400			Records a Camera/File using Microsoft dShow	
+StreamWindow	Output	FFMPeg	ffmpeg -f gdigrab -framerate 30 -i title="$WINDOW$" $STREAMCOMMAND$	300,300,400,400			Stream the video source window without audio	
+RecordWAudio	Output	FFMPeg	ffmpeg -f gdigrab -framerate 30 -i title="$WINDOW$" -b:v 3M "$MEDIAOUTDIRECTORY$$NEWFILEWindow$.avi"	693,21,400,400			Records Window and its audio	
+StreamWAudio	Output	FFMPeg	ffmpeg -f gdigrab -framerate 30 -i title="$WINDOW$" -f dshow -i  audio="$AUDIOOUTPUT$" $STREAMCOMMAND$	300,300,400,400			StreamsWindow and its audio	
+RecordAudio	Output	FFMPeg	ffmpeg -f dshow -i audio="$LOCALAUDIODEVICE$" -f dshow -i audio="$MICROPHONE$" -filter_complex amix -y  "$MEDIAOUTDIRECTORY$$NEWFILEWindow$.wav"	300,300,400,400			Records Audio Output from input	
+StreamAudio	Output	FFMPeg	ffmpeg -f dshow -i audio="$LOCALAUDIODEVICE$" -f dshow -i audio="$MICROPHONE$" -filter_complex amix -y  $STREAMCOMMAND$	300,300,400,400			Streams Audio Output from input	
+RecordMike	Output	FFMPeg	ffmpeg -f dshow -i audio="$LOCALAUDIODEVICE$" "$MEDIAOUTDIRECTORY$$NEWFILEMike$.wav"	300,300,400,400			Records Audio Output from MicroPhone	
+StreamMike	Output	FFMPeg	ffmpeg -f dshow -i audio="$LOCALAUDIODEVICE$" $STREAMCOMMAND$	300,300,400,400			Streams Audio Output from MicroPhone	
+RecordWMike	Output	FFMPeg	ffmpeg -f gdigrab -framerate 30 -i title="$WINDOW$" -f dshow -i audio="$LOCALAUDIODEVICE$" "$MEDIAOUTDIRECTORY$/$NEWFILERecordmike$.avi"	488,6,200,400			Records Window and Audio Output from MicroPhone	
+StreamWMike	Output	FFMPeg	ffmpeg -f gdigrab -framerate 30 -i title="$WINDOW$" -f dshow -i  audio="$LOCALAUDIODEVICE$" $STREAMCOMMAND$	300,300,400,400			Streams Window and Audio Output from MicroPhone	
+RecordLayout	Output	FFMPeg	ffmpeg -f gdigrab -framerate 30 -i desktop $MEDIAOUTDIRECTORY$$NEWFILE$.mkv	300,300,400,400			Records Desktop	
+ConvertAVIMPG	Process	FFMPeg	cd $MEDIADIRECTORY$\\\ffmpeg -i $PROCESSfile\VIDEOEXT$ -y "$MEDIAOUTDIRECTORY$\$PROCESSoutfile$.mpg"	300,300,400,400			Demonstrates PROCESS File Processing. Converts api files to mpg file with same name	
+VLCShowVideoFile	Play	VLC	vlc --qt-minimal-view  "$FILE\VIDEOEXT$" 	300,300,400,400			Run VLC Video File	
+VLCShowVideoFileFilters	Play	VLC	vlc --qt-minimal-view  "$FILE\VIDEOEXT$" $VLCFilters$ 	300,300,400,400			Run VLC Video File	
+VLCPlayAudioFile	Play	VLC	vlc --qt-minimal-view  "$FILE\AUDIOEXT$" 	300,300,400,400			Run VLC Audio File 	
+VLCShowImageFile	Play	VLC	vlc --qt-minimal-view  "$FILE\IMAGEEXT$" 	300,300,400,400		FaceHAAR	Run VLC Image File 	
+DefShowVideoFile	Play	VideoFiles	"$FILE\VIDEOEXT$"	300,300,400,400			Run Video File using default program	
+DefShowImageFile	Play	ImageFiles	"$FILE\IMAGEEXT$"	300,300,400,400			Run Image File using default program	
+DisplayCamerawithMike	Play	FFPlay	ffplay -f dshow  -framerate 18 -i video="$LOCALVIDEODEVICE$":audio="$LOCALAUDIODEVICE$"	300,300,400,400				
+RecordCamerawithMike	Process	FFPlay	ffplay -f dshow  -framerate 18 -i video="$LOCALVIDEODEVICE$":audio="$LOCALAUDIODEVICE$"	"$MEDIAOUTDIRECTORY$$NEWFILECam$"				
+PLayDirectory	Play	VLC	vlc "$DIRECTORY$" --random --loop	300,300,400,400			plays all files in directory randomly	
+MergeTwoVideos	Process	FFMPeg	cd $MEDIADIRECTORY$\\\ffmpeg -i  "$FILEONLY\VIDEOEXT$" -vf "[in] scale=iw/2:ih/2, pad=2*iw:ih [left];  movie='$FILEONLY\VIDEOEXT$', scale=iw/3:ih/3, fade=out:300:30:alpha=1 [right]; [left][right] overlay=main_w/2:0 [out]" -b:v 768k "$MEDIAOUTDIRECTORY$\$NEWFILECap$.avi"	300,300,400,400				
+MergeFiles4	Process	FFMPeg	ffmpeg  -i "$FILES" -i "\VIDEOEXT$" -filter_complex " nullsrc=size=640x480 [base]; [0:v] setpts=PTS-STARTPTS, scale=320x240 [upperleft]; [1:v] setpts=PTS-STARTPTS, scale=320x240 [upperright]; [2:v] setpts=PTS-STARTPTS, scale=320x240 [lowerleft]; [3:v] setpts=PTS-STARTPTS, scale=320x240 [lowerright]; [base][upperleft] overlay=shortest=1 [tmp1]; [tmp1][upperright] overlay=shortest=1:x=320 [tmp2];[tmp2][lowerleft] overlay=shortest=1:y=240 [tmp3]; [tmp3][lowerright] overlay=shortest=1:x=320:y=240 "  -c:v libx264 $MEDIAOUTDIRECTORY$\$NEWFILEOut$.mp4	300,300,400,400				
+RecordDesktop	Process	FFMPeg	ffmpeg -f gdigrab -framerate 30 -i desktop $MEDIAOUTDIRECTORY$\$NEWFILE$.mkv	300,300,400,400			Records Desktop	
+RecordWindow	Process	FFMPeg	ffmpeg -f gdigrab -framerate 30 -i title="$USERWINDOW$" -b:v 3M $MEDIAOUTDIRECTORY$\$NEWFILECap$.avi	300,300,400,400				
+MergeClips	Process	FFMPeg	cd $MEDIADIRECTORY$\\\mkdir temp\\\ffmpeg  -ss $PROCESSss$ -i "$PROCESSfile$" -c:v libx264 -c:a aac -frames:v $PROCESSf$  -y "temp\$PROCESSoutfile$" \\\ffmpeg -f concat -safe 0 -i tempfile.txt -c copy $MEDIAOUTDIRECTORY$/$NEWFILEOut$.mp4	300,300,400,400			Merge files from selected input file	
+MergeClips1	Process	FFMPeg	cd $MEDIADIRECTORY$\\\mkdir temp\\\ffmpeg  -ss $PROCESSss$ -i "$PROCESSfile$"  -c:v libx264 -c:a aac -frames:v $PROCESSf$  -y "temp\$PROCESSNEWFILE$.avi" \\\ffmpeg -f concat -safe 0 -i tempfile.txt   -c copy $MEDIAOUTDIRECTORY$/$NEWFILEOut$.avi	300,300,400,400			Merge files from selected input file	
+PlayFile	Process	FFPlay	cd $MEDIADIRECTORY$\\\ffplay -i "$PROCESSfile\VIDEOEXT$ "	300,300,400,400				
+DisplayLANCamera	Play	FFPlay	ffplay rtsp://192.168.8.177:8080/h264_ulaw.sdp	300,300,400,400			Displays stream from Android camera	
+VoiceOver	Output	FFPlay	ffmpeg -rtbufsize 1500M -f dshow -i audio="$LOCALAUDIODEVICE$" -f -y -rtbufsize 100M -f gdigrab -framerate 30 -probesize 10M -draw_mouse 1 -i desktop -c:v libx264 -r 30 -preset ultrafast -tune zerolatency -crf 25 -pix_fmt yuv420p "$MEDIAOUTDIRECTORY$$NEWFILEDesktop$.avi	300,300,400,400			Records Desktop	
+OverlayTitle	Process	FFMPeg	cd $MEDIADIRECTORY$\\\ffmpeg -i "$PROCESSfileMP4 (*.mp4)|*.mp4|All files (*.*)|*.*$" -i $OverlayImage$ -pix_fmt yuv420p -c:a copy $MEDIAOUTDIRECTORY$\$PROCESSNEWFILETitle$.mp4	500,200,400,400			Overlay a title image on video. The image appears at 25,25 for the first 5 seconds	
+interleave	Process	FFMPeg	ffmpeg -i "$FILE\VIDEOEXT$" -i "$FILE\VIDEOEXT$" -filter_complex "[0:v][1:v] interleave" $MEDIAOUTDIRECTORY$/$NEWFILEinterleave$.avi	500,200,400,400			Interleave two files 	

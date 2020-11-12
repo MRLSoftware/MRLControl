@@ -1,0 +1,33 @@
+TEXT	STREAMKEY	ttcb-m0rb-20tw-c9qv		Generic Streaming Key
+TEXT	UTUBEKEY	fmwk-v7md-xbuc-cqh3-3vwz		U-tube streaming key
+USER	CAPTION	LISTSelect Caption Location:CAPTIONBR:MyCaption		Allows User Selection of Text Caption Location
+TEXT	OverlayImage	"$OverlayVideo:ImageFile$" -filter_complex "$Overlay$" 		FFMPeg filter to read overlay parameters for overlaying image on Video
+TEXT	CAMERA	HP WebcamDefault Camera		User defined Camera Default
+TEXT	STREAMCOMMAND	-f flv $STREAMTARGET$/$UTUBEKEY$		Stream command (In Work)
+TEXT	STREAMTARGET	rtmp://a.rtmp.youtube.com/live2		U-Tube URL Target location for streaming
+TEXT	IMAGEEXT	Images (*.jpg)|*.jpg|All files (*.*)|*.*		Standard extensions for Image Files
+TEXT	VIDEOEXT	AVI (*.avi)|*.avi|MP4 (*.mp4)|*.mp4|All files (*.*)|*.*		Standard extensions for Video Files
+TEXT	UserStringTypes	WebSites:Text,FFMFilter:Filter,MyCaption:Text,FFOther:Other,FFInput:Input,FFCodec:Codec,FFOutput:Output,FFFormat:Format,FFCodecSet:CodecSet,FFFormatSet:FormatSet,OverlayVideo:Text		This is the list of script types.  To add a new user type, add the name followed by colon and type.  Types are System,Text,Filter,Other,Input,C odec,Format and FormatSet
+USER	FFMPEGFilters	LISTSelect Desired Filter:Vintage:ffmpegvfilter		Select One of a set for specific ffmpegfilters
+USER	VLCFilters	LISTSelect Desired Filter:Rotate:vlcvfilter		Select One of a set for specific VLC filters
+USER	Overlay	PARAMInput Values: [0:v][1:v] overlay=\Overlay Screen Location(Left:Top)=25:25/:enable='between(t,\Overlay Start Time(Secs)=0/,\Overlay Stop Time(Secs)=5/)'		
+MyCaption	CAPTIONBR	 -vf drawtext="fontfile=C\:/Regular.ttf: text='$CAPTION$': fontcolor=white: fontsize=24: box=1: boxcolor=black@0.4: x=w-tw:y=h-th"		Option for MyCaption to position text at bottom right of video
+MyCaption	CAPTIONCENTER	 -vf drawtext="fontfile=C\:/Regular.ttf: text='$CAPTION$': fontcolor=white: fontsize=24: box=1: boxcolor=black@0.4: x=(w-tw)/2:y=(h-th)/2"		Option for MyCaption to position text at center of video
+MyCaption	CAPTIONTCENTER	 -vf drawtext="fontfile=C\:/Regular.ttf: text='$CAPTION$': fontcolor=white: fontsize=24: box=1: boxcolor=black@0.4: x=(w-tw)/2:y=0"		Option for MyCaption to position text at top center of video
+ffmpegvfilter	Mirrow	-vf "crop=iw/2:ih:0:0,split[left][tmp];[tmp]hflip[right];[left][right] hstack"		Selectable Demo1Filters FFMPeg filter to mirrow Video
+ffmpegvfilter	Split4	-vf "split=4[a][b][c][d];[b]lutyuv=u=128:v=128[x];[c]lutyuv=y=0:v=128[y];[d]lutyuv=y=0:u=128[z];[a][x][y][z]hstack=4"		Selectable Demo1Filters FFMPeg filter to split video into 4 sections
+ffmpegvfilter	Vintage	-vf curves=vintage 		Selectable Demo1Filters FFMPeg filter to creat4e vintage effect for Video
+ffmpegvfilter	16mmfilmlook	-vf hue=s=0,boxblur=lr=1.2,noise=c0s=7:allf=t,format=yuv420p		Selectable Demo1Filters FFMPeg filter to create 16 m Effect for Video
+ffmpegvfilter	SepiaEffects	-vf  colorchannelmixer=.393:.769:.189:0:.349:.686:.168:0:.272:.534:.131		Selectable Demo1Filters FFMPeg filter to create Sepial Effects for Video
+ffmpegvfilter	Fade1	-vf "fade=t=in:st=0:d=5,fade=t=out:st=30:d=5"  		Selectable Demo1Filters FFMPeg filter to Fade  Video
+ffmpegvfilter	Rotate	-vf rotate=PI/3+2*PI*t/40		Selectable Demo1Filters FFMPeg filter to Rotate Video
+ffmpegvfilter	FlipSplit	-vf "split [main][tmp]; [tmp] crop=iw:ih/2:0:0, vflip [flip]; [main][flip] overlay=0:H/2"		Selectable Demo1Filters FFMPeg filter to Split Video
+ffmpegvfilter	GammaScale1	-vf scale=480:270,lutyuv=y=val*4,lutyuv=y=gammaval'(2.0)'		Selectable Demo1Filters FFMPeg filter to adjust Gamma for Video
+ffmpegvfilter	Blur	-vf unsharp=7:7:-2:7:7:-2 		Selectable Demo1Filters FFMPeg filter to Blur Video
+ffmpegvfilter	ZoomPan	-vf  "zoompan=z='zoom+0.002':d=25*4:s=1280x800"		Selectable Demo1Filters FFMPeg filter to Zoom/Pan Video
+vlcvfilter	Bright	--video-filter adjust $USERPARAM--contrast \Contrast=.9/ --brightness \Brightness=.9/ --gamma \Gamma=3/ $ 		
+vlcvfilter	Rotate	--video-filter $USERPARAM"rotate {angle=\Degrees=90/}" $		
+vlcvfilter	Ripple	--video-filter=ripple		
+vlcvfilter	Wave	--video-filter=wave		
+OverlayVideo	ImageFile	animated-dog-image-0297.gif		This is the Image to be overlaid on video
+FFCodecSet	codecset	 h262,h263i,indeo3,mjpeg,mpeg2,video,libx264,dvaudio		
