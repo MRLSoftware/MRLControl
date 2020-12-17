@@ -1,0 +1,3 @@
+VLCDemo$$100,100,200,200$$$$VLCShowVideoFile	vlc --qt-minimal-view  "$FILE\VIDEOEXT$" vlc://quit,VLC VLCShowVideoFile$$$$Shows Using VLC commands$$
+Files$$0,0,1600,900$$1-1-973-548,974-1-482-282,1178-282-277-275,974-281-206-274$$FFShowVideoFileFilters	ffplay -i "$MEDIADIRECTORY$\prpol-rerender2.avi",FFShowVideoFileFilters	ffplay -i "$MEDIADIRECTORY$\grill-mjpeg.mov",FFShowVideoFileFilters	ffplay -i "$MEDIADIRECTORY$\Precision.mp4",FFShowVideoFileFilters	ffplay -i "$MEDIADIRECTORY$\page18-movie-4.flv"$$None$$Displays 4 dirrerent files either sequerntially or as layout and records then$$
+testscripts$$0,0,1600,900$$990-1-469-436,34-1-954-442$$FFPlay FFShowVideoFile,VLC VLCShowVideoFile$$$$	Uses FFPlay and VLC to show video files$$

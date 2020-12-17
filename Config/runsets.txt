@@ -1,0 +1,2 @@
+PhotosApp	Process	Image	ms-photos:
+Photo	Process	Image	$FILEAVI (*.avi)|*.avi|MPEG (*.mpg)|*.mpg|All files (*.*)|*.*$
