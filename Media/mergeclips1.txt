@@ -1,0 +1,4 @@
+file	ss	f
+precision.mp4	00:01:00	300
+precision.mp4	00:01:50	400
+precision.mp4	00:02:40	400
